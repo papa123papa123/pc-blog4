@@ -1,0 +1,17 @@
+{{/* Balloon/吹き出し shortcode 
+Usage: {{< balloon name="名前" dir="left" >}}テキスト{{< /balloon >}}
+dir: left または right (デフォルト: left)
+*/}}
+{{ $name := .Get "name" | default "？" }}
+{{ $dir := .Get "dir" | default "left" }}
+{{ $initial := substr $name 0 1 }}
+
+<div class="balloon {{ $dir }}">
+  <div class="balloon-icon-wrapper">
+    <div class="balloon-icon-text">{{ $initial }}</div>
+    <div class="balloon-name">{{ $name }}</div>
+  </div>
+  <div class="balloon-text">{{ .Inner | markdownify }}</div>
+</div>
+
+

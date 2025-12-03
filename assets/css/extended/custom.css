@@ -1,0 +1,763 @@
+/* デザインシステムをインポート */
+@import "design_system.css";
+
+/* ===========================================
+   カスタムスタイル - 装飾拡張版
+   =========================================== */
+
+/* ----------------------------------------
+   マーカー（蛍光ペン風）
+   ---------------------------------------- */
+.marker-yellow {
+    background: linear-gradient(transparent 60%, #fff799 60%);
+    padding: 0 0.2em;
+}
+
+.marker-pink {
+    background: linear-gradient(transparent 60%, #ffb8d1 60%);
+    padding: 0 0.2em;
+}
+
+.marker-blue {
+    background: linear-gradient(transparent 60%, #a8d8ea 60%);
+    padding: 0 0.2em;
+}
+
+/* ----------------------------------------
+   ボックス装飾
+   ---------------------------------------- */
+
+/* ポイントボックス（チェック） */
+.box-point {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    border-left: 4px solid #4caf50;
+    padding: 1.2em 1.5em;
+    margin: 1.5em 0;
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+}
+
+.box-point::before {
+    content: "✅ POINT";
+    display: block;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 0.5em;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+}
+
+/* 注意ボックス */
+.box-caution {
+    background: linear-gradient(135deg, #fff3e0 0%, #fff8e1 100%);
+    border-left: 4px solid #ff9800;
+    padding: 1.2em 1.5em;
+    margin: 1.5em 0;
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);
+}
+
+.box-caution::before {
+    content: "⚠️ 注意";
+    display: block;
+    font-weight: bold;
+    color: #e65100;
+    margin-bottom: 0.5em;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+}
+
+/* メモボックス */
+.box-memo {
+    background: linear-gradient(135deg, #e3f2fd 0%, #e8eaf6 100%);
+    border-left: 4px solid #2196f3;
+    padding: 1.2em 1.5em;
+    margin: 1.5em 0;
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+}
+
+.box-memo::before {
+    content: "📝 メモ";
+    display: block;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 0.5em;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+}
+
+/* 補足ボックス（グレー） */
+.box-note {
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 1.2em 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+    position: relative;
+}
+
+.box-note::before {
+    content: "💡 補足";
+    display: block;
+    font-weight: bold;
+    color: #616161;
+    margin-bottom: 0.5em;
+    font-size: 0.85em;
+}
+
+/* box-titleがある場合は::beforeを非表示（重複防止） */
+.box-point:has(.box-title)::before,
+.box-caution:has(.box-title)::before,
+.box-memo:has(.box-title)::before,
+.box-note:has(.box-title)::before {
+    display: none;
+}
+
+/* box-titleのスタイル */
+.box-title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 0.95em;
+}
+
+.box-point .box-title { color: #2e7d32; }
+.box-caution .box-title { color: #e65100; }
+.box-memo .box-title { color: #1565c0; }
+.box-note .box-title { color: #616161; }
+
+/* ----------------------------------------
+   見出し装飾
+   ---------------------------------------- */
+.post-content h2 {
+    position: relative;
+    padding: 0.8em 0 0.5em 0;
+    margin-top: 3em;
+    margin-bottom: 1.5em;
+    border-bottom: 3px solid var(--primary, #6c5ce7);
+}
+
+.post-content h2::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary, #6c5ce7), transparent);
+}
+
+.post-content h3 {
+    border-left: 4px solid var(--primary, #6c5ce7);
+    padding-left: 1em;
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+    background: linear-gradient(90deg, rgba(108, 92, 231, 0.05), transparent);
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+.post-content h4 {
+    border-bottom: 2px dotted #ccc;
+    padding-bottom: 0.3em;
+    margin-top: 2em;
+    color: #555;
+}
+
+/* ----------------------------------------
+   テーブル装飾
+   ---------------------------------------- */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-content thead {
+    background: linear-gradient(135deg, var(--primary, #6c5ce7), #a29bfe);
+    color: white;
+}
+
+.post-content th {
+    padding: 1em;
+    text-align: left;
+    font-weight: 600;
+}
+
+.post-content td {
+    padding: 0.8em 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.post-content tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.post-content tbody tr:hover {
+    background: #f0f0ff;
+}
+
+/* ----------------------------------------
+   リスト装飾
+   ---------------------------------------- */
+.post-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.post-content ul li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.8;
+}
+
+.post-content ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--primary, #6c5ce7);
+    font-weight: bold;
+}
+
+.post-content ol {
+    counter-reset: ol-counter;
+    list-style: none;
+    padding-left: 0;
+}
+
+.post-content ol li {
+    counter-increment: ol-counter;
+    position: relative;
+    padding-left: 2.5em;
+    margin-bottom: 0.8em;
+    line-height: 1.8;
+}
+
+.post-content ol li::before {
+    content: counter(ol-counter);
+    position: absolute;
+    left: 0;
+    width: 1.8em;
+    height: 1.8em;
+    background: var(--primary, #6c5ce7);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+/* ----------------------------------------
+   引用装飾
+   ---------------------------------------- */
+.post-content blockquote {
+    border-left: 4px solid var(--primary, #6c5ce7);
+    background: linear-gradient(90deg, #f8f9fa, transparent);
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #555;
+    position: relative;
+}
+
+.post-content blockquote::before {
+    content: """;
+    position: absolute;
+    top: -0.2em;
+    left: 0.2em;
+    font-size: 3em;
+    color: var(--primary, #6c5ce7);
+    opacity: 0.2;
+    font-family: serif;
+}
+
+/* ----------------------------------------
+   コード装飾
+   ---------------------------------------- */
+.post-content code {
+    background: #f1f3f5;
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #e74c3c;
+}
+
+/* ----------------------------------------
+   この記事でわかること
+   ---------------------------------------- */
+.post-content h2:first-of-type + ul,
+.post-content > ul:first-of-type {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5em 2em;
+    border-radius: 12px;
+    margin: 1.5em 0;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.post-content h2:first-of-type + ul li::before,
+.post-content > ul:first-of-type li::before {
+    content: "✓";
+    color: #a0e4ff;
+}
+
+/* ----------------------------------------
+   著者情報
+   ---------------------------------------- */
+.post-content hr + h2 + p strong {
+    display: block;
+    font-size: 1.2em;
+    color: var(--primary, #6c5ce7);
+    margin-bottom: 0.5em;
+}
+
+/* ----------------------------------------
+   スクロールボックス（長い表向け）
+   ---------------------------------------- */
+.scroll-box {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ----------------------------------------
+   アニメーション
+   ---------------------------------------- */
+.box-point, .box-caution, .box-memo, .box-note {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box-point:hover, .box-caution:hover, .box-memo:hover, .box-note:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ----------------------------------------
+   吹き出し（バルーン）
+   ---------------------------------------- */
+.balloon {
+    display: flex;
+    align-items: flex-start;
+    margin: 1.5em 0;
+    gap: 1em;
+}
+
+.balloon.left {
+    flex-direction: row;
+}
+
+.balloon.right {
+    flex-direction: row-reverse;
+}
+
+.balloon-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #e0e0e0;
+}
+
+.balloon-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.balloon-icon-text {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.balloon-text {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 1em 1.2em;
+    max-width: 80%;
+    line-height: 1.7;
+}
+
+.balloon.left .balloon-text::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 15px;
+    border: 8px solid transparent;
+    border-right-color: #f5f5f5;
+}
+
+.balloon.right .balloon-text {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.balloon.right .balloon-text::before {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 15px;
+    border: 8px solid transparent;
+    border-left-color: #764ba2;
+}
+
+.balloon-name {
+    font-size: 0.75em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.3em;
+}
+
+/* ----------------------------------------
+   FAQ（Q&A）ブロック
+   ---------------------------------------- */
+.faq-item {
+    margin: 1.5em 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 1em 1.2em;
+    font-weight: bold;
+}
+
+.faq-question::before {
+    content: "Q";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    background: white;
+    color: #667eea;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.faq-answer {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8em;
+    background: #f9f9f9;
+    padding: 1em 1.2em;
+    line-height: 1.8;
+}
+
+.faq-answer::before {
+    content: "A";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    background: #ff6b6b;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 0.2em;
+}
+
+/* ----------------------------------------
+   ステップブロック（手順説明）
+   ---------------------------------------- */
+.steps {
+    counter-reset: step-counter;
+    margin: 1.5em 0;
+}
+
+.step-item {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 1.5em;
+    position: relative;
+}
+
+.step-item::before {
+    counter-increment: step-counter;
+    content: "STEP " counter(step-counter);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 30px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 15px;
+    font-size: 0.75em;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.step-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 35px;
+    width: 2px;
+    height: calc(100% - 10px);
+    background: linear-gradient(180deg, #667eea, #e0e0e0);
+}
+
+.step-content {
+    flex: 1;
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 1em 1.2em;
+    border-left: 3px solid #667eea;
+}
+
+.step-title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+/* ----------------------------------------
+   タイムライン
+   ---------------------------------------- */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+    margin: 1.5em 0;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #667eea, #764ba2, #667eea);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.5em;
+    padding-left: 1em;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 3px solid #667eea;
+    border-radius: 50%;
+}
+
+.timeline-date {
+    font-size: 0.85em;
+    color: #667eea;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+}
+
+.timeline-content {
+    background: #f9f9f9;
+    padding: 1em;
+    border-radius: 8px;
+    line-height: 1.7;
+}
+
+/* ----------------------------------------
+   比較表
+   ---------------------------------------- */
+.comparison-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin: 1.5em 0;
+}
+
+.comparison-col {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.comparison-header {
+    padding: 1em;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.comparison-col.good .comparison-header {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+}
+
+.comparison-col.bad .comparison-header {
+    background: linear-gradient(135deg, #fd79a8, #e84393);
+}
+
+.comparison-body {
+    background: #f9f9f9;
+    padding: 1em;
+}
+
+.comparison-body ul {
+    margin: 0;
+    padding: 0;
+}
+
+.comparison-col.good .comparison-body li::before {
+    content: "○";
+    color: #00b894;
+}
+
+.comparison-col.bad .comparison-body li::before {
+    content: "×";
+    color: #e84393;
+}
+
+/* ----------------------------------------
+   ラベル付きボックス
+   ---------------------------------------- */
+.labeled-box {
+    margin: 1.5em 0;
+    border: 2px solid #667eea;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.labeled-box-header {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.labeled-box-content {
+    padding: 1em 1.2em;
+    line-height: 1.8;
+}
+
+/* ----------------------------------------
+   強調文（大きな引用）
+   ---------------------------------------- */
+.highlight-quote {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+    padding: 1.5em 2em;
+    margin: 2em 0;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+}
+
+/* ----------------------------------------
+   チェックリスト
+   ---------------------------------------- */
+.checklist {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 1.2em 1.5em;
+    margin: 1.5em 0;
+}
+
+.checklist-title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid #667eea;
+}
+
+.checklist ul {
+    margin: 0;
+}
+
+.checklist li {
+    padding: 0.3em 0;
+}
+
+.checklist li::before {
+    content: "☐";
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+/* ----------------------------------------
+   レスポンシブ対応
+   ---------------------------------------- */
+@media (max-width: 768px) {
+    .post-content h2 {
+        font-size: 1.3em;
+        margin-top: 2em;
+    }
+    
+    .post-content h3 {
+        font-size: 1.1em;
+        margin-top: 1.5em;
+    }
+    
+    .box-point, .box-caution, .box-memo, .box-note {
+        padding: 1em;
+        margin: 1em 0;
+    }
+    
+    .post-content table {
+        font-size: 0.85em;
+    }
+    
+    /* 吹き出し */
+    .balloon {
+        flex-direction: column;
+    }
+    
+    .balloon.left .balloon-text::before,
+    .balloon.right .balloon-text::before {
+        display: none;
+    }
+    
+    .balloon-text {
+        max-width: 100%;
+    }
+    
+    /* ステップ */
+    .step-item::after {
+        display: none;
+    }
+    
+    /* 比較表 */
+    .comparison-table {
+        grid-template-columns: 1fr;
+    }
+}

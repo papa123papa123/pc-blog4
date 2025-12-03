@@ -1,0 +1,68 @@
+{{/*
+Pochipp互換ショートコード（shop-linkへのエイリアス）
+
+使用例:
+{{< pochipp title="商品名" amazon="URL" rakuten="URL" yahoo="URL" >}}
+*/}}
+
+{{ $title := .Get "title" | default "商品名" }}
+{{ $img := .Get "img" | default "" }}
+{{ $price := .Get "price" }}
+{{ $amazon := .Get "amazon" }}
+{{ $rakuten := .Get "rakuten" }}
+{{ $yahoo := .Get "yahoo" }}
+
+<div class="pochipp-box" data-shop-link>
+  <div class="pochipp-box__inner">
+    {{ if $img }}
+    <div class="pochipp-box__image">
+      <a href="{{ $amazon | default $rakuten | default $yahoo }}" target="_blank" rel="nofollow noopener sponsored">
+        <img src="{{ $img }}" alt="{{ $title }}" loading="lazy">
+      </a>
+    </div>
+    {{ end }}
+    
+    <div class="pochipp-box__info">
+      <div class="pochipp-box__title">
+        <a href="{{ $amazon | default $rakuten | default $yahoo }}" target="_blank" rel="nofollow noopener sponsored">
+          {{ $title }}
+        </a>
+      </div>
+      
+      {{ with $price }}
+      <div class="pochipp-box__price">
+        <span class="pochipp-box__price-label">参考価格:</span>
+        <span class="pochipp-box__price-value">¥{{ . }}</span>
+      </div>
+      {{ end }}
+      
+      <div class="pochipp-box__buttons">
+        {{ with $amazon }}
+        <div class="pochipp-box__btn-wrapper">
+          <a href="{{ . }}" class="pochipp-box__btn pochipp-box__btn--amazon" target="_blank" rel="nofollow noopener sponsored">
+            Amazonで見る
+          </a>
+        </div>
+        {{ end }}
+        
+        {{ with $rakuten }}
+        <div class="pochipp-box__btn-wrapper">
+          <a href="{{ . }}" class="pochipp-box__btn pochipp-box__btn--rakuten" target="_blank" rel="nofollow noopener sponsored">
+            楽天市場で見る
+          </a>
+        </div>
+        {{ end }}
+        
+        {{ with $yahoo }}
+        <div class="pochipp-box__btn-wrapper">
+          <a href="{{ . }}" class="pochipp-box__btn pochipp-box__btn--yahoo" target="_blank" rel="nofollow noopener sponsored">
+            Yahooで見る
+          </a>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+
+

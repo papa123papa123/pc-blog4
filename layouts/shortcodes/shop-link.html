@@ -1,0 +1,88 @@
+{{/*
+Shop Link - 商品リンクカード（セール情報付き・JavaScript動的判定）
+
+使用例:
+{{< shop-link 
+    title="商品名" 
+    img="画像URL" 
+    price="4,990"
+    amazon="AmazonリンクURL" 
+    rakuten="楽天リンクURL" 
+    yahoo="YahooリンクURL" 
+>}}
+*/}}
+
+{{ $title := .Get "title" | default "商品名" }}
+{{ $img := .Get "img" | default "" }}
+{{ $price := .Get "price" }}
+{{ $amazon := .Get "amazon" }}
+{{ $rakuten := .Get "rakuten" }}
+{{ $yahoo := .Get "yahoo" }}
+
+<div class="pochipp-box" data-shop-link>
+  <div class="pochipp-box__inner">
+    <!-- 商品画像 -->
+    {{ if $img }}
+    <div class="pochipp-box__image">
+      <a href="{{ $amazon | default $rakuten | default $yahoo }}" target="_blank" rel="nofollow noopener sponsored">
+        <img src="{{ $img }}" alt="{{ $title }}" loading="lazy">
+      </a>
+    </div>
+    {{ end }}
+    
+    <!-- 商品情報 -->
+    <div class="pochipp-box__info">
+      <div class="pochipp-box__title">
+        <a href="{{ $amazon | default $rakuten | default $yahoo }}" target="_blank" rel="nofollow noopener sponsored">
+          {{ $title }}
+        </a>
+      </div>
+      
+      {{ with $price }}
+      <div class="pochipp-box__price">
+        <span class="pochipp-box__price-label">参考価格:</span>
+        <span class="pochipp-box__price-value">¥{{ . }}</span>
+      </div>
+      {{ end }}
+      
+      <!-- アフィリエイトボタン + セール情報（JSで動的表示） -->
+      <div class="pochipp-box__buttons">
+        {{ with $amazon }}
+        <div class="pochipp-box__btn-wrapper">
+          <a href="{{ . }}" class="pochipp-box__btn pochipp-box__btn--amazon" target="_blank" rel="nofollow noopener sponsored">
+            <svg class="pochipp-box__btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595.427-.16.772-.053.939.311.166.364.017.696-.418.936-.996.553-2.17 1.013-3.514 1.381-1.35.366-2.67.548-3.954.548-4.657 0-8.86-1.39-12.607-4.17-.145-.107-.186-.22-.111-.355zm6.75-4.026c0-.822.176-1.492.533-2.012.354-.52.865-.905 1.532-1.154-.49-.196-.86-.468-1.106-.816-.247-.349-.371-.778-.371-1.288 0-.85.295-1.528.883-2.029.588-.5 1.35-.75 2.28-.75.844 0 1.535.27 2.07.815.54.546.805 1.244.805 2.097 0 .512-.122.957-.367 1.334-.245.378-.59.675-1.034.894.737.196 1.315.55 1.73 1.062.417.513.625 1.176.625 1.99 0 1.105-.376 2.003-1.127 2.695-.752.69-1.716 1.036-2.892 1.036-1.21 0-2.195-.355-2.952-1.067-.758-.712-1.137-1.603-1.137-2.675l.528.132zm1.596-.04c0 .643.188 1.155.563 1.537.376.382.87.573 1.482.573.612 0 1.106-.188 1.479-.565.375-.378.561-.887.561-1.525 0-.634-.19-1.145-.569-1.534-.379-.389-.866-.584-1.463-.584-.605 0-1.103.192-1.49.576-.386.384-.579.89-.579 1.522h.016zm.346-5.18c0 .477.142.859.424 1.145.282.287.658.43 1.13.43.464 0 .838-.145 1.12-.433.282-.289.424-.67.424-1.142 0-.472-.144-.854-.428-1.143-.284-.29-.657-.436-1.116-.436-.467 0-.844.147-1.13.438-.286.293-.428.673-.428 1.143l.004-.002z"/>
+            </svg>
+            <span class="pochipp-box__btn-text">Amazonで見る</span>
+          </a>
+          <span class="pochipp-box__sale-badge pochipp-box__sale-badge--amazon" data-sale="amazon"></span>
+        </div>
+        {{ end }}
+        
+        {{ with $rakuten }}
+        <div class="pochipp-box__btn-wrapper">
+          <a href="{{ . }}" class="pochipp-box__btn pochipp-box__btn--rakuten" target="_blank" rel="nofollow noopener sponsored">
+            <svg class="pochipp-box__btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 17.785c-.168.076-.348.115-.532.115-.39 0-.756-.156-1.029-.438l-2.073-2.145-2.073 2.145c-.273.282-.64.438-1.029.438-.184 0-.364-.039-.532-.115-.504-.228-.828-.73-.828-1.285V7.5c0-.552.448-1 1-1h5.064c1.633 0 2.96 1.327 2.96 2.96 0 1.265-.8 2.347-1.922 2.768l1.822 1.887c.312.323.406.803.24 1.228-.166.424-.545.729-.994.834-.09.021-.18.032-.274.032z"/>
+            </svg>
+            <span class="pochipp-box__btn-text">楽天市場で見る</span>
+          </a>
+          <span class="pochipp-box__sale-badge pochipp-box__sale-badge--rakuten" data-sale="rakuten"></span>
+        </div>
+        {{ end }}
+        
+        {{ with $yahoo }}
+        <div class="pochipp-box__btn-wrapper">
+          <a href="{{ . }}" class="pochipp-box__btn pochipp-box__btn--yahoo" target="_blank" rel="nofollow noopener sponsored">
+            <svg class="pochipp-box__btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.151 6.338l-3.529 6.588 2.128 5.236h-2.461l-1.4-3.529L7.36 18.162H4.899l4.499-6.625-2.128-5.199h2.461l1.287 3.286 3.452-3.286h2.681z"/>
+            </svg>
+            <span class="pochipp-box__btn-text">Yahooで見る</span>
+          </a>
+          <span class="pochipp-box__sale-badge pochipp-box__sale-badge--yahoo" data-sale="yahoo"></span>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+{{/* FAQ shortcode - Usage: {{< faq q="質問" >}}回答{{< /faq >}} */}}
+<div class="faq-item">
+  <div class="faq-question">{{ .Get "q" }}</div>
+  <div class="faq-answer">{{ .Inner | markdownify }}</div>
+</div>
+
+
