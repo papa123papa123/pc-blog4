@@ -1,0 +1,9 @@
+# Hugo関連（使用しない）
+.hugo_build.lock
+resources/
+themes/
+
+# 開発用
+.DS_Store
+Thumbs.db
+*.log
